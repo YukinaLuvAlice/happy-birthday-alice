@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { executeQuery } from '@/lib/db';
+import { details } from 'framer-motion/client';
 
 type Wish = {
   Id: number;
@@ -10,14 +11,14 @@ type Wish = {
 export async function POST(request: Request) {
   try {
     const { wish } = await request.json();
-
+    console.log('Received wish:', wish);
     if (!wish || typeof wish !== 'string') {
       return NextResponse.json(
         { error: 'Invalid wish format' },
         { status: 400 }
       );
     }
-
+    console.log('Attempting database connection...');
     const insertQuery = `
       INSERT INTO [dbo].[Wishes] (WishText)
       VALUES (@param0);
@@ -25,11 +26,22 @@ export async function POST(request: Request) {
     `;
 
     const result = await executeQuery<any[]>(insertQuery, [wish]);
+    console.log('Database operation successful:', result);
     return NextResponse.json({ success: true, wish: result[0] });
+
   } catch (error) {
-    console.error('Failed to save wish:', error);
+    console.error('Detailed error:', {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      state: error.state
+    });
     return NextResponse.json(
-      { success: false, error: 'Failed to save wish' },
+      {
+        success: false,
+        error: 'Failed to save wish'
+        details: error.message
+      },
       { status: 500 }
     );
   }
