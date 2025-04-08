@@ -63,7 +63,7 @@ export function Letter({ onComplete }: LetterProps) {
                                 Gửi Alice yêu dấu của 🦊
                             </h2>
                             <p className="text-lg text-gray-700 leading-relaxed">
-                                Thời gian trôi nhanh ghê~ Thoáng cái thôi mà nàng mèo nhà ta đã đón sinh nhật 18 tuổi lần 2 rồi. Mong em tuổi mới mãi luôn yêu đời, tràn đầy năng lượng. Công việc, học hành, tình yêu, gia đình mọi thứ đều thuận lợi, trọn vẹn theo ý mình~ Anh nghĩ mình chỉ có thể chút những điều đó thôi, vì gì em cũng có hết rồi<br></br>
+                                Thời gian trôi nhanh ghê~ Thoáng cái thôi mà nàng mèo nhà ta đã đón sinh nhật 18 tuổi lần 2 rồi. Mong em tuổi mới mãi luôn yêu đời, tràn đầy năng lượng. Công việc, học hành, tình yêu, gia đình mọi thứ đều thuận lợi, trọn vẹn theo ý mình~<br></br>
                                 Mong em luôn là chính mình Alice<br></br>
                                 🦊❄️💓😸✨<br></br>
                                 -Yukina-
