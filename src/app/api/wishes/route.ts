@@ -31,16 +31,16 @@ export async function POST(request: Request) {
 
   } catch (error) {
     console.error('Detailed error:', {
-      message: error.message,
-      stack: error.stack,
-      code: error.code,
-      state: error.state
+      message: (error as any).message,
+      stack: (error as any).stack,
+      code: (error as any).code,
+      state: (error as any).state
     });
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to save wish'
-        details: error.message
+        error: 'Failed to save wish',
+        details: (error as any).message
       },
       { status: 500 }
     );

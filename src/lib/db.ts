@@ -44,12 +44,12 @@ export async function executeQuery<T>(query: string, params: any[] = []): Promis
         return response.recordset as T[];
     } catch (error) {
         console.error('Database error details:', {
-            message: error.message,
-            code: error.code,
-            state: error.state,
-            class: error.class,
-            lineNumber: error.lineNumber,
-            serverName: error.serverName
+            message: (error as Error).message,
+            code: (error as any).code,
+            state: (error as any).state,
+            class: (error as any).class,
+            lineNumber: (error as any).lineNumber,
+            serverName: (error as any).serverName
         });
         throw error;
     }
