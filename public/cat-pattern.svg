@@ -1,0 +1,11 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <text id="cat-icon" x="0" y="0" font-size="40px">😺</text>
+  </defs>
+
+  <rect width="200" height="200" fill="#f0f0f0"/>
+  <use href="#cat-icon" x="10" y="40"/>
+  <use href="#cat-icon" x="110" y="40"/>
+  <use href="#cat-icon" x="10" y="140"/>
+  <use href="#cat-icon" x="110" y="140"/>
+</svg>
