@@ -9,12 +9,13 @@ const config: sql.config = {
     options: {
         encrypt: false,
         trustServerCertificate: true,
-        enableArithAbort: true
+        enableArithAbort: true,
+        requestTimeout: 300000
     },
     pool: {
         max: 10,
         min: 0,
-        idleTimeoutMillis: 30000
+        idleTimeoutMillis: 300000
     }
 };
 
