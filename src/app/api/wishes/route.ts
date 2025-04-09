@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { executeQuery } from '@/lib/db';
-import { details } from 'framer-motion/client';
+import moment from 'moment-timezone';
 
 type Wish = {
   Id: number;
@@ -18,30 +18,19 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    console.log('Attempting database connection...');
-    const insertQuery = `
-      INSERT INTO [dbo].[Wishes] (WishText)
-      VALUES (@param0);
-      SELECT TOP 1 * FROM [dbo].[Wishes] ORDER BY Id DESC;
-    `;
 
-    const result = await executeQuery<any[]>(insertQuery, [wish]);
-    console.log('Database operation successful:', result);
-    return NextResponse.json({ success: true, wish: result[0] });
+    // Lấy thời gian hiện tại ở múi giờ Mỹ
+    const currentTime = moment().tz("America/New_York").format(); // Thay đổi múi giờ nếu cần
 
+    // Thực hiện truy vấn để chèn điều ước vào bảng
+    const query = 'INSERT INTO Wishes (WishText, CreatedAt) VALUES (@param0, @param1)';
+    await executeQuery(query, [wish, currentTime]);
+
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Detailed error:', {
-      message: (error as any).message,
-      stack: (error as any).stack,
-      code: (error as any).code,
-      state: (error as any).state
-    });
+    console.error('Detailed error:', error);
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Failed to save wish',
-        details: (error as any).message
-      },
+      { success: false, error: 'Failed to save wish', details: (error as any).message },
       { status: 500 }
     );
   }
